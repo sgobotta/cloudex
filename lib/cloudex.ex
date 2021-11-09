@@ -3,6 +3,10 @@ defmodule Cloudex do
   Cloudex takes care of uploading image files or urls to Cloudinary
   """
 
+  @callback start(settings :: map) :: {:ok, pid}
+  @callback upload(list | [String.t()], map) :: upload_result
+  @callback delete([String.t()]) :: :ok
+
   @doc """
   You can start the GenServer that holds the cloudinary api settings by hand using this function.
   ## example
@@ -64,10 +68,6 @@ defmodule Cloudex do
     Cloudex.CloudinaryApi
     |> Task.async(:delete_prefix, [prefix])
     |> Task.await(60_000)
-  end
-
-  defp sanitize_item(item) do
-    if Regex.match?(~r/^(http|s3)/, item), do: {:ok, item}, else: handle_file_or_directory(item)
   end
 
   @spec sanitize_list(list | String.t(), list) :: [{:ok, String.t()} | {:error, String.t()}]
