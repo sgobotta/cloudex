@@ -66,6 +66,10 @@ defmodule Cloudex do
     |> Task.await(60_000)
   end
 
+  defp sanitize_item(item) do
+    if Regex.match?(~r/^(http|s3)/, item), do: {:ok, item}, else: handle_file_or_directory(item)
+  end
+
   @spec sanitize_list(list | String.t(), list) :: [{:ok, String.t()} | {:error, String.t()}]
   defp sanitize_list(list, sanitized_list \\ [])
   defp sanitize_list(item, _sanitized_list) when is_binary(item), do: sanitize_list([item])
