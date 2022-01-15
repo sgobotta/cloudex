@@ -55,7 +55,7 @@ defmodule Cloudex do
   def upload_list_with_options(list, default_options \\ %{}) do
     list
     |> Enum.map(fn %{url: url} = item ->
-      item_specific_options = Map.drop(item, :url)
+      item_specific_options = Map.drop(item, [:url])
       options = Map.merge(default_options, item_specific_options)
 
       Task.async(fn ->

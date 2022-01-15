@@ -113,10 +113,10 @@ defmodule CloudexTest do
                  {:ok, %Cloudex.UploadedImage{}}
                ] =
                  Cloudex.upload_list_with_options([
-                   %{image_resource: "./test/assets/test.jpg"},
-                   %{image_resource: "nonexistent.png"},
+                   %{url: "./test/assets/test.jpg"},
+                   %{url: "nonexistent.png"},
                    %{
-                     image_resource:
+                     url:
                        "https://cdn.mhpbooks.com/uploads/2014/10/shutterstock_172896005.jpg"
                    }
                  ])
@@ -131,10 +131,10 @@ defmodule CloudexTest do
                  {:ok, %Cloudex.UploadedImage{}}
                ] =
                  Cloudex.upload_list_with_options([
-                   %{image_resource: "./test/assets/test.jpg", options: %{public_id: "foo"}},
-                   %{image_resource: "nonexistent.png", options: %{public_id: "bar"}},
+                   %{url: "./test/assets/test.jpg", public_id: "foo"},
+                   %{url: "nonexistent.png", public_id: "bar"},
                    %{
-                     image_resource:
+                     url:
                        "https://cdn.mhpbooks.com/uploads/2014/10/shutterstock_172896005.jpg"
                    }
                  ])
